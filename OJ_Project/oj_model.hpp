@@ -96,6 +96,7 @@ class oj_Model
             return ques_path + "tail.cpp";
         }
     private:
+        //把文件上的数据加载到内存中，加到哈希表中
         bool LoadQuestions(const std::string& configfile_path)
         {
             //使用C++中的文件流来加载文件，获取文件中的内容

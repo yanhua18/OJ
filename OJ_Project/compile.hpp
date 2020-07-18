@@ -37,7 +37,8 @@ class Compiler
             }
             //2,将代码写到文件当中去
             //文件名称进行约定 tmp_时间戳.cpp
-            std::string code=Req["code"].asString();
+            std::string code=Req["code"].asString();//asString可将json::value转换为string类型
+            //通过这个函数将代码写入到代码文件当中
             std::string tmp_filename=WriteTmpFile(code);
             if(tmp_filename=="")
             {
@@ -46,7 +47,7 @@ class Compiler
                 (*Resp)["reason"]="Create file failed";
                 return;
             }
-            //3,编译
+            //3,编译出错，出错处理
             if(!Compile(tmp_filename))
             {
                 (*Resp)["errorno"]=COMPILE_ERROR;
@@ -67,7 +68,7 @@ class Compiler
                 std::cout<<std::endl;
                 return;
             }
-            //5，构造响应
+            //5，程序正常运行，输出运行结果信息
             (*Resp)["errorno"]=OK;
             (*Resp)["reason"]="Compile and run is okey";
             //标准输出
@@ -157,6 +158,7 @@ class Compiler
                 {
                     LOG(ERROR,"打开compile文件失败");
                     std::cout<<ErrorPath(filename)<<std::endl;
+                    exit(0);
                 }
                 //重定向
                 dup2(fd,2);

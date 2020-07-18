@@ -16,16 +16,6 @@ int main()
             {
             std::vector<Question> ques;
             ojmode.GetAllQuestions(&ques);
-
-//            char buf[10240]={'\0'};
-//           printf("%d\n",ques.size());
-//           if(ques.size()==1)
-//           {
-//           snprintf(buf,sizeof(buf)-1,"<html>%s.%s %s</html>",ques[0].id_.c_str(),ques[0].name_.c_str(),ques[0].star_.c_str());
-//           }
-//           std::string html;
-//           html.assign(buf,strlen(buf));
-            
             std::string html;
             oj_view::ExpandAllQuestionshtml(&html,ques);
             //LOG(INFO,html);
